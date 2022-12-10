@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {InMemoryDbService} from "angular-in-memory-web-api";
 import {RawData} from "../model/raw-data";
 
@@ -7,19 +7,28 @@ import {RawData} from "../model/raw-data";
 })
 export class InMemoryDataService implements InMemoryDbService {
 
-  constructor() { }
+  private readonly numberOfSamples = 200;
+
+  constructor() {
+  }
 
   createDb() {
-    const data: RawData[] = [
-      {date: 1670695150, value: 170},
-      {date: 1670695250, value: 254},
-      {date: 1670695350, value: 312},
-      {date: 1670695450, value: 133},
-      {date: 1670695550, value: 35},
-      {date: 1670695650, value: 342},
-      {date: 1670695750, value: 189},
-      {date: 1670695850, value: 56},
-    ]
+    // const data: RawData[] = this.getRandomData(7200); // 2 hours period
+    // const data: RawData[] = this.getRandomData(172800); // 2 days
+    const data: RawData[] = this.getRandomData(2629743); // 1 month
     return {data};
   }
+
+  getRandomData(periodInSeconds: number): RawData[] {
+    let data: RawData[] = [];
+    const startDate = 1670702400;
+    for (let date = startDate; date < startDate + periodInSeconds; date += periodInSeconds / this.numberOfSamples) {
+      const temperature = Math.random() * 30;
+      const light = Math.floor(Math.random() * 1000);
+      const rawData = new RawData(temperature, light, date);
+      data.push(rawData);
+    }
+    return data;
+  }
+
 }

@@ -18,7 +18,8 @@ export class ChartComponent implements OnInit {
 
   chartData: RawData[] = [];
   chartDates: (string | null)[] = [];
-  chartValues: number[] = [];
+  chartTemperature: number[] = [];
+  chartLight: number[] = [];
 
   basicData: any;
   basicOptions: any;
@@ -63,7 +64,8 @@ export class ChartComponent implements OnInit {
   }
 
   setValues(): void {
-    this.chartValues = this.chartData.map(data => data.value);
+    this.chartTemperature = this.chartData.map(data => data.temperature);
+    this.chartLight = this.chartData.map(data => data.light);
   }
 
   setChart(): void {
@@ -72,7 +74,7 @@ export class ChartComponent implements OnInit {
       datasets: [
         {
           label: 'Light intensity',
-          data: this.chartValues,
+          data: this.chartTemperature,
           fill: false,
           borderColor: '#42A5F5',
           tension: .4
