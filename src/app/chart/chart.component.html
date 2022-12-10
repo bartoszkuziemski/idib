@@ -2,6 +2,11 @@
 
   <h1>app</h1>
 
+  <div class="p-field p-col-12 p-md-4">
+    <label for="time">Time</label>
+    <p-calendar [(ngModel)]="calendarDate" (onClose)="onClose()" [showTime]="true" [showSeconds]="true" dateFormat="dd.mm.yy" inputId="time"></p-calendar>
+  </div>
+
   <div class="chart">
     <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
   </div>

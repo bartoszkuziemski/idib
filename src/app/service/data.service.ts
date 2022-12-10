@@ -19,7 +19,7 @@ export class DataService {
   ) {
   }
 
-  getVariables(): Observable<Data[]> {
+  getFullData(): Observable<Data[]> {
     const url = DataService.ROOT_URL;
     return this.http.get<Data[]>(url, this.httpOptions);
   }

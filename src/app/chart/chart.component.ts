@@ -14,6 +14,7 @@ export class ChartComponent implements OnInit {
   ) {
   }
 
+  fullData: Data[] = [];
   data: Data[] = [];
   dates: string[] = [];
   values: number[] = [];
@@ -21,12 +22,14 @@ export class ChartComponent implements OnInit {
   basicData: any;
   basicOptions: any;
 
+  calendarDate: Date | undefined;
+
   ngOnInit(): void {
     this.getData();
   }
 
   getData(): void {
-    this.dataService.getVariables().subscribe({
+    this.dataService.getFullData().subscribe({
       next: data => {
         this.data = data;
         this.setAllData();
@@ -64,4 +67,7 @@ export class ChartComponent implements OnInit {
   }
 
 
+  onClose() {
+    console.log(this.calendarDate)
+  }
 }

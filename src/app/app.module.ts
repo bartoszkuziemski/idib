@@ -10,6 +10,7 @@ import {ChartComponent} from './chart/chart.component';
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {HttpClientModule} from "@angular/common/http";
 import {InMemoryDataService} from "./service/in-memory-data.service";
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {InMemoryDataService} from "./service/in-memory-data.service";
     FormsModule,
     HttpClientModule,
     // remove when a real server is ready to receive requests
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
+    CalendarModule
 
   ],
   providers: [],
