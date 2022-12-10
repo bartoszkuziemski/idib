@@ -7,6 +7,9 @@ import {ToastModule} from "primeng/toast";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ChartComponent} from './chart/chart.component';
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import {HttpClientModule} from "@angular/common/http";
+import {InMemoryDataService} from "./service/in-memory-data.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +21,11 @@ import {ChartComponent} from './chart/chart.component';
     BrowserAnimationsModule,
     ChartModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    // remove when a real server is ready to receive requests
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
