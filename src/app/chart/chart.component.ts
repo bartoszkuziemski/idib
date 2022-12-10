@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../service/data.service";
-import {Data} from "../model/data";
+import {RawData} from "../model/raw-data";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-chart',
@@ -10,14 +11,14 @@ import {Data} from "../model/data";
 export class ChartComponent implements OnInit {
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private datePipe: DatePipe
   ) {
   }
 
-  fullData: Data[] = [];
-  data: Data[] = [];
-  dates: string[] = [];
-  values: number[] = [];
+  chartData: RawData[] = [];
+  chartDates: (string | null)[] = [];
+  chartValues: number[] = [];
 
   basicData: any;
   basicOptions: any;
@@ -31,7 +32,7 @@ export class ChartComponent implements OnInit {
   getData(): void {
     this.dataService.getFullData().subscribe({
       next: data => {
-        this.data = data;
+        this.chartData = data;
         this.setAllData();
       }
     })
@@ -44,20 +45,34 @@ export class ChartComponent implements OnInit {
   }
 
   setDates(): void {
-    this.dates = this.data.map(data => data.date);
+    const timestampDateFrom = this.chartData[0].date;
+    const timestampDateTo = this.chartData[this.chartData.length - 1].date;
+    const timeDifference = Math.abs(timestampDateTo - timestampDateFrom);
+    const dates = this.chartData.map(data => new Date(data.date * 1000));
+    if (timeDifference < 86400) {
+      this.chartDates = dates.map(date => {
+        return this.datePipe.transform(date, 'HH:mm', 'UTC', 'pl');
+      })
+    }
+    else {
+      this.chartDates = dates.map(date => {
+        return this.datePipe.transform(date, 'dd.MM, HH:mm');
+      })
+    }
+
   }
 
   setValues(): void {
-    this.values = this.data.map(data => data.value);
+    this.chartValues = this.chartData.map(data => data.value);
   }
 
   setChart(): void {
     this.basicData = {
-      labels: this.dates,
+      labels: this.chartDates,
       datasets: [
         {
           label: 'Light intensity',
-          data: this.values,
+          data: this.chartValues,
           fill: false,
           borderColor: '#42A5F5',
           tension: .4
@@ -65,7 +80,6 @@ export class ChartComponent implements OnInit {
       ]
     };
   }
-
 
   onClose() {
     console.log(this.calendarDate)

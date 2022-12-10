@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Data} from "../model/data";
+import {RawData} from "../model/raw-data";
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class DataService {
   ) {
   }
 
-  getFullData(): Observable<Data[]> {
+  getFullData(): Observable<RawData[]> {
     const url = DataService.ROOT_URL;
-    return this.http.get<Data[]>(url, this.httpOptions);
+    return this.http.get<RawData[]>(url, this.httpOptions);
   }
 
 }

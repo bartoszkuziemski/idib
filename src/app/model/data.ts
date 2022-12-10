@@ -1,4 +1,4 @@
 export interface Data {
-  date: string;
+  date: Date;
   value: number;
 }
