@@ -50,15 +50,27 @@ export class ChartComponent implements OnInit {
     const timestampDateTo = this.chartData[this.chartData.length - 1].date;
     const timeDifference = Math.abs(timestampDateTo - timestampDateFrom);
     const dates = this.chartData.map(data => new Date(data.date * 1000));
-    if (timeDifference < 86400) {
+    if (timeDifference < 86400) { // less than 24 hours
       this.chartDates = dates.map(date => {
         return this.datePipe.transform(date, 'HH:mm', 'UTC', 'pl');
-      })
+      });
+    } else if (timeDifference >= 86400 && timeDifference < 432000) { // between 24 hours and 120 hours
+      this.chartDates = dates.map(date => {
+        return this.datePipe.transform(date, 'dd.MM, HH:mm');
+      });
+    } else if (timeDifference >= 432000 && timeDifference < 10368000) { // between 120 hours and 2880 hours
+      this.chartDates = dates.map(date => {
+        return this.datePipe.transform(date, 'dd.MM, HH:00');
+      });
+    } else if (timeDifference >= 10368000 && timeDifference < 31556926) { // between 2880 hours (120 days) and 1 year
+      this.chartDates = dates.map(date => {
+        return this.datePipe.transform(date, 'dd.MM');
+      });
     }
     else {
       this.chartDates = dates.map(date => {
-        return this.datePipe.transform(date, 'dd.MM, HH:mm');
-      })
+        return this.datePipe.transform(date, 'dd.MM.yy');
+      });
     }
 
   }
