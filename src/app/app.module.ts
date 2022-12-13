@@ -29,7 +29,7 @@ registerLocaleData(localePl, 'pl');
     FormsModule,
     HttpClientModule,
     // remove when a real server is ready to receive requests
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
     CalendarModule
   ],
   providers: [

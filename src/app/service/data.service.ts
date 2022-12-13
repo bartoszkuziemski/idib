@@ -8,28 +8,28 @@ import {RawData} from "../model/raw-data";
 })
 export class DataService {
 
-  // static readonly ROOT_URL = 'http://localhost:8080/data';
-  static readonly ROOT_URL = 'api/data';
+  static readonly ROOT_URL = 'http://localhost:8080/data';
+  // static readonly ROOT_URL = 'api/data';
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  // getFullData(dateFrom: Date, dateTo: Date): Observable<RawData[]> {
-  //   const url = DataService.ROOT_URL;
-  //   const dateFromTimestamp = dateFrom.getTime();
-  //   const dateToTimestamp = dateTo.getTime();
-  //   return this.http.get<RawData[]>(url, {
-  //     params: new HttpParams()
-  //       .set('dateFrom', dateFromTimestamp)
-  //       .set('dateTo', dateToTimestamp)
-  //   });
-  // }
-
   getFullData(dateFrom: Date, dateTo: Date): Observable<RawData[]> {
     const url = DataService.ROOT_URL;
-    return this.http.get<RawData[]>(url);
+    const dateFromTimestamp = Math.floor(dateFrom.getTime() / 1000);
+    const dateToTimestamp = Math.floor(dateTo.getTime() / 1000);
+    return this.http.get<RawData[]>(url, {
+      params: new HttpParams()
+        .set('dateFrom', dateFromTimestamp)
+        .set('dateTo', dateToTimestamp)
+    });
   }
+
+  // getFullData(dateFrom: Date, dateTo: Date): Observable<RawData[]> {
+  //   const url = DataService.ROOT_URL;
+  //   return this.http.get<RawData[]>(url);
+  // }
 
 }
