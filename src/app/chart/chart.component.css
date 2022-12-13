@@ -8,3 +8,17 @@
   width: 100%;
   max-width: 1300px;
 }
+
+.calendars {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.calendar {
+  margin: 0 50px 0 50px;
+}
+
+.calendar label {
+  margin-right: 10px;
+}

@@ -24,14 +24,15 @@ export class ChartComponent implements OnInit {
   basicData: any;
   basicOptions: any;
 
-  calendarDate: Date | undefined;
+  calendarDateFrom: Date = new Date(Date.now() - (86400 * 1000));
+  calendarDateTo: Date = new Date(Date.now());
 
   ngOnInit(): void {
     this.getData();
   }
 
   getData(): void {
-    this.dataService.getFullData().subscribe({
+    this.dataService.getFullData(this.calendarDateFrom, this.calendarDateTo).subscribe({
       next: data => {
         this.chartData = data;
         this.setAllData();
@@ -96,6 +97,6 @@ export class ChartComponent implements OnInit {
   }
 
   onClose() {
-    console.log(this.calendarDate)
+    this.getData();
   }
 }

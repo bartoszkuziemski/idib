@@ -2,9 +2,18 @@
 
   <h1>app</h1>
 
-  <div class="p-field p-col-12 p-md-4">
-    <label for="time">Time</label>
-    <p-calendar [(ngModel)]="calendarDate" (onClose)="onClose()" [showTime]="true" [showSeconds]="true" dateFormat="dd.mm.yy" inputId="time"></p-calendar>
+  <div class="calendars">
+    <div class="p-field p-col-12 p-md-4 calendar">
+      <label for="dateFrom">From</label>
+      <p-calendar id="dateFrom" [(ngModel)]="calendarDateFrom" (onClose)="onClose()" [showTime]="true"
+                  dateFormat="dd.mm.yy"></p-calendar>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4 calendar">
+      <label for="dateTo">To</label>
+      <p-calendar id="dateTo" [(ngModel)]="calendarDateTo" (onClose)="onClose()" [showTime]="true"
+                  dateFormat="dd.mm.yy"></p-calendar>
+    </div>
   </div>
 
   <div class="chart">
