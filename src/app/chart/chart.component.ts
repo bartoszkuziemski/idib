@@ -22,7 +22,7 @@ export class ChartComponent implements OnInit {
   chartLight: number[] = [];
 
   basicData: any;
-  basicOptions: any;
+  multiAxisOptions: any;
 
   calendarDateFrom: Date = new Date(Date.now() - (86400 * 1000));
   calendarDateTo: Date = new Date(Date.now());
@@ -87,12 +87,65 @@ export class ChartComponent implements OnInit {
       datasets: [
         {
           label: 'Light intensity',
-          data: this.chartTemperature,
+          data: this.chartLight,
           fill: false,
           borderColor: '#42A5F5',
-          tension: .4
+          tension: .4,
+          yAxisID: 'light'
+        },
+        {
+          label: 'Temperature',
+          data: this.chartTemperature,
+          fill: false,
+          borderColor: '#FFA726',
+          tension: .4,
+          yAxisID: 'temperature'
         }
       ]
+    };
+
+    this.multiAxisOptions = {
+      stacked: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#495057'
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#495057'
+          },
+          grid: {
+            color: '#ebedef'
+          }
+        },
+        light: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          ticks: {
+            color: '#495057'
+          },
+          grid: {
+            color: '#ebedef'
+          }
+        },
+        temperature: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          ticks: {
+            color: '#495057'
+          },
+          grid: {
+            drawOnChartArea: false,
+            color: '#ebedef'
+          }
+        }
+      }
     };
   }
 
