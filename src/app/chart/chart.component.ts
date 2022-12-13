@@ -27,6 +27,8 @@ export class ChartComponent implements OnInit {
   calendarDateFrom: Date = new Date(Date.now() - (86400 * 1000));
   calendarDateTo: Date = new Date(Date.now());
 
+  error: boolean = false;
+
   ngOnInit(): void {
     this.getData();
   }
@@ -35,8 +37,10 @@ export class ChartComponent implements OnInit {
     this.dataService.getFullData(this.calendarDateFrom, this.calendarDateTo).subscribe({
       next: data => {
         this.chartData = data;
+        this.error = false;
         this.setAllData();
-      }
+      },
+      error: () => this.error = true
     })
   }
 

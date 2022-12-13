@@ -13,6 +13,7 @@ import {InMemoryDataService} from "./service/in-memory-data.service";
 import {CalendarModule} from "primeng/calendar";
 import {DatePipe, registerLocaleData} from "@angular/common";
 import localePl from "@angular/common/locales/pl";
+import {MessageModule} from "primeng/message";
 
 registerLocaleData(localePl, 'pl');
 
@@ -30,7 +31,8 @@ registerLocaleData(localePl, 'pl');
     HttpClientModule,
     // remove when a real server is ready to receive requests
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
-    CalendarModule
+    CalendarModule,
+    MessageModule
   ],
   providers: [
     DatePipe,

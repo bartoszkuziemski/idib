@@ -16,6 +16,8 @@
     </div>
   </div>
 
+  <p-message *ngIf="error" severity="error" text="Could not load the data"></p-message>
+
   <div class="chart">
     <p-chart type="line" [data]="basicData" [options]="multiAxisOptions"></p-chart>
   </div>
