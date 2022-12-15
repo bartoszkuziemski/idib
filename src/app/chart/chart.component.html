@@ -16,9 +16,10 @@
     </div>
   </div>
 
+  <p *ngIf="noData">No data for chosen dates range</p>
   <p-message *ngIf="error" severity="error" text="Could not load the data"></p-message>
 
-  <div class="chart">
+  <div *ngIf="!noData" class="chart">
     <p-chart type="line" [data]="basicData" [options]="multiAxisOptions"></p-chart>
   </div>
 

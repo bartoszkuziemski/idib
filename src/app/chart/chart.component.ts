@@ -28,6 +28,7 @@ export class ChartComponent implements OnInit {
   calendarDateTo: Date = new Date(Date.now());
 
   error: boolean = false;
+  noData: boolean = false;
 
   ngOnInit(): void {
     this.getData();
@@ -36,15 +37,20 @@ export class ChartComponent implements OnInit {
   getData(): void {
     this.dataService.getFullData(this.calendarDateFrom, this.calendarDateTo).subscribe({
       next: data => {
-        this.chartData = data;
         this.error = false;
-        this.setAllData();
+        if (data.length != 0) {
+          this.setAllData(data);
+          this.noData = false;
+        } else {
+          this.noData = true;
+        }
       },
       error: () => this.error = true
     })
   }
 
-  setAllData(): void {
+  setAllData(data: RawData[]): void {
+    this.chartData = data.sort((a, b) => a.date - b.date);
     this.setDates();
     this.setValues();
     this.setChart();
