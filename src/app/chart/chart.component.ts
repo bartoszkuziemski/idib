@@ -63,7 +63,7 @@ export class ChartComponent implements OnInit {
     const dates = this.chartData.map(data => new Date(data.date * 1000));
     if (timeDifference < 86400) { // less than 24 hours
       this.chartDates = dates.map(date => {
-        return this.datePipe.transform(date, 'HH:mm', 'UTC', 'pl');
+        return this.datePipe.transform(date, 'HH:mm');
       });
     } else if (timeDifference >= 86400 && timeDifference < 432000) { // between 24 hours and 120 hours
       this.chartDates = dates.map(date => {
