@@ -14,6 +14,7 @@ import {CalendarModule} from "primeng/calendar";
 import {DatePipe, registerLocaleData} from "@angular/common";
 import localePl from "@angular/common/locales/pl";
 import {MessageModule} from "primeng/message";
+import {TabViewModule} from "primeng/tabview";
 
 registerLocaleData(localePl, 'pl');
 
@@ -22,18 +23,19 @@ registerLocaleData(localePl, 'pl');
     AppComponent,
     ChartComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ChartModule,
-    ToastModule,
-    FormsModule,
-    HttpClientModule,
-    // remove when a real server is ready to receive requests
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
-    CalendarModule,
-    MessageModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ChartModule,
+        ToastModule,
+        FormsModule,
+        HttpClientModule,
+        // remove when a real server is ready to receive requests
+        // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
+        CalendarModule,
+        MessageModule,
+        TabViewModule
+    ],
   providers: [
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pl-PL'},

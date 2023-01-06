@@ -4,10 +4,10 @@
   align-items: center;
 }
 
-.chart {
-  width: 100%;
-  max-width: 1300px;
-}
+/*.chart {*/
+/*  width: 100%;*/
+/*  max-width: 1300px;*/
+/*}*/
 
 .calendars {
   display: flex;
@@ -33,4 +33,9 @@ p {
 
 h3 {
   color: #686868;
+}
+
+.tabs {
+  width: 100%;
+  max-width: 1300px;
 }

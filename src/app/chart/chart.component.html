@@ -1,6 +1,6 @@
 <div class="main-wrapper">
 
-  <h3>Temperature and light intensity charts</h3>
+  <h3>Temperature, humidity and light intensity charts</h3>
 
   <div class="calendars">
     <div class="p-field p-col-12 p-md-4 calendar">
@@ -16,11 +16,28 @@
     </div>
   </div>
 
+  <div class="tabs">
+    <p-tabView>
+      <p-tabPanel header="Temperature">
+        <div *ngIf="!noData" class="chart">
+          <p-chart type="line" [data]="temperatureChart" ></p-chart>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Humidity">
+        <div *ngIf="!noData" class="chart">
+          <p-chart type="line" [data]="humidityChart" ></p-chart>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Light intensity">
+        <div *ngIf="!noData" class="chart">
+          <p-chart type="line" [data]="lightChart" ></p-chart>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
   <p *ngIf="noData">No data for chosen dates range</p>
   <p-message *ngIf="error" severity="error" text="Could not load the data"></p-message>
 
-  <div *ngIf="!noData" class="chart">
-    <p-chart type="line" [data]="basicData" [options]="multiAxisOptions"></p-chart>
-  </div>
 
 </div>

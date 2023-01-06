@@ -28,7 +28,7 @@ export class InMemoryDataService implements InMemoryDbService {
     for (let date = startDate; date < startDate + periodInSeconds; date += periodInSeconds / this.numberOfSamples) {
       const temperature = Math.random() * 30;
       const light = Math.floor(Math.random() * 1000);
-      const rawData = new RawData(temperature, light, date);
+      const rawData = new RawData(date, temperature, light, temperature, temperature, temperature);
       data.push(rawData);
     }
     return data;
